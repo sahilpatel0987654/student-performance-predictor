@@ -1,0 +1,11 @@
+StudentID,Attendance_Rate,Study_Hours_Weekly,Previous_Grade,Assignments_Completed,Participation_Score,Performance_Category
+STU_1001,85,15,78,90,8,Good
+STU_1002,60,6,50,65,3,At Risk
+STU_1003,74,10,65,80,6,Average
+STU_1004,92,22,88,95,9,Good
+STU_1005,55,5,45,62,2,At Risk
+STU_1006,81,12,70,85,7,Average
+STU_1007,88,18,82,90,8,Good
+STU_1008,68,8,58,72,4,At Risk
+STU_1009,79,14,69,83,6,Average
+STU_1010,95,25,94,98,10,Good
