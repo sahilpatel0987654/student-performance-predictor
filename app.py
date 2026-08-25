@@ -14,6 +14,84 @@ from sklearn.ensemble import RandomForestClassifier
 st.set_page_config(page_title="Student Risk Analyzer", page_icon="🎓", layout="centered")
 
 st.title("🎓 Intelligent Student Performance & Academic Risk Predictor")
+st.markdown("""
+    <style>
+    /* 1. खतरनाक साइबरपंक डार्क बैकग्राउंड (Futuristic Matrix Theme) */
+    .stApp {
+        background: radial-gradient(circle at top right, #090514, #030712 60%, #020617 100%) !important;
+        color: #00ffcc !important; /* टेक्स्ट को नियॉन सियान रंग देना */
+        font-family: 'Courier New', Courier, monospace !important;
+    }
+    
+    /* 2. मुख्य हेडिंग को एनिमेटेड और ग्लोइंग बनाना */
+    .stHeading h1, .main-title {
+        font-size: 42px !important;
+        font-weight: 900 !important;
+        text-transform: uppercase;
+        color: #fff !important;
+        text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 40px #6366f1 !important;
+        animation: pulse 2s infinite alternate;
+    }
+    
+    @keyframes pulse {
+        from { transform: scale(1); }
+        to { transform: scale(1.01); }
+    }
+    
+    /* 3. साइडबार को बेहद डार्क और नियॉन बॉर्डर देना */
+    [data-testid="stSidebar"] {
+        background-color: #05050a !important;
+        border-right: 2px solid #ff007f !important; /* हॉट पिंक नियॉन बॉर्डर */
+        box-shadow: 5px 0px 15px rgba(255, 0, 127, 0.2);
+    }
+    
+    /* 4. बटन्स को बेहद खतरनाक और चमकदार बनाना (Neon Pulse Button) */
+    div.stButton > button {
+        background: transparent !important;
+        color: #00ffcc !important;
+        border: 2px solid #00ffcc !important;
+        border-radius: 0px !important; /* शार्प कट्स लुक */
+        padding: 12px 28px !important;
+        font-size: 18px !important;
+        font-weight: bold !important;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        box-shadow: 0 0 10px rgba(0, 255, 204, 0.3), inset 0 0 10px rgba(0, 255, 204, 0.2) !important;
+        transition: all 0.4s ease-in-out !important;
+    }
+    
+    /* बटन पर माउस ले जाने पर (Hover Effect) खतरनाक चमक */
+    div.stButton > button:hover {
+        background: #00ffcc !important;
+        color: #000000 !important; /* टेक्स्ट ब्लैक हो जाएगा */
+        box-shadow: 0 0 20px #00ffcc, 0 0 40px #00ffcc !important;
+        transform: translateY(-3px);
+    }
+    
+    /* 5. डेटा टेबल और कार्ड्स को ग्लास जैसा चमकता हुआ बनाना (Cyber Cards) */
+    div[data-testid="metric-container"], .element-container, div[data-baseweb="input"] {
+        background-color: rgba(10, 10, 20, 0.75) !important;
+        border: 1px solid #ff007f !important;
+        border-radius: 4px !important;
+        box-shadow: 0 0 15px rgba(255, 0, 127, 0.15) !important;
+        transition: all 0.3s ease;
+    }
+    
+    div[data-testid="metric-container"]:hover {
+        border: 1px solid #00ffcc !important;
+        box-shadow: 0 0 20px rgba(0, 255, 204, 0.3) !important;
+    }
+    
+    /* 6. सिलेक्टर्स और इनपुट टेक्स्ट का रंग बदलना */
+    input, select, textarea {
+        color: #00ffcc !important;
+    }
+    label p {
+        color: #ff007f !important; /* इनपुट लेबल्स को पिंक करना */
+        font-weight: bold;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 st.write("This AI-powered system analyzes student data to predict academic categories and find students at risk.")
 st.markdown("---")
 
