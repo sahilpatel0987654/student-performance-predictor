@@ -16,79 +16,76 @@ st.set_page_config(page_title="Student Risk Analyzer", page_icon="🎓", layout=
 st.title("🎓 Intelligent Student Performance & Academic Risk Predictor")
 st.markdown("""
     <style>
-    /* 1. खतरनाक साइबरपंक डार्क बैकग्राउंड (Futuristic Matrix Theme) */
+    /* 1. रॉयल ब्लू और लग्जरी डार्क ग्रेडिएंट बैकग्राउंड */
     .stApp {
-        background: radial-gradient(circle at top right, #090514, #030712 60%, #020617 100%) !important;
-        color: #00ffcc !important; /* टेक्स्ट को नियॉन सियान रंग देना */
-        font-family: 'Courier New', Courier, monospace !important;
+        background: linear-gradient(135deg, #060a17 0%, #0d1527 40%, #1e1136 100%) !important;
+        color: #e2e8f0 !important;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
     }
     
-    /* 2. मुख्य हेडिंग को एनिमेटेड और ग्लोइंग बनाना */
+    /* 2. मुख्य हेडिंग को Apple स्टाइल में साफ़ और चमकदार बनाना */
     .stHeading h1, .main-title {
-        font-size: 42px !important;
-        font-weight: 900 !important;
-        text-transform: uppercase;
-        color: #fff !important;
-        text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 40px #6366f1 !important;
-        animation: pulse 2s infinite alternate;
+        font-size: 40px !important;
+        font-weight: 800 !important;
+        letter-spacing: -0.5px;
+        background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        margin-bottom: 10px;
     }
     
-    @keyframes pulse {
-        from { transform: scale(1); }
-        to { transform: scale(1.01); }
-    }
-    
-    /* 3. साइडबार को बेहद डार्क और नियॉन बॉर्डर देना */
+    /* 3. साइडबार को प्रीमियम डार्क और फ्रॉस्टेड ग्लास लुक देना */
     [data-testid="stSidebar"] {
-        background-color: #05050a !important;
-        border-right: 2px solid #ff007f !important; /* हॉट पिंक नियॉन बॉर्डर */
-        box-shadow: 5px 0px 15px rgba(255, 0, 127, 0.2);
+        background-color: rgba(10, 17, 34, 0.85) !important;
+        backdrop-filter: blur(10px) !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
     }
     
-    /* 4. बटन्स को बेहद खतरनाक और चमकदार बनाना (Neon Pulse Button) */
+    /* 4. बटन्स को बेहद मॉडर्न, स्मूथ और आकर्षक बनाना */
     div.stButton > button {
-        background: transparent !important;
-        color: #00ffcc !important;
-        border: 2px solid #00ffcc !important;
-        border-radius: 0px !important; /* शार्प कट्स लुक */
+        background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%) !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 12px !important; /* गोल और स्मूथ किनारे */
         padding: 12px 28px !important;
-        font-size: 18px !important;
-        font-weight: bold !important;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        box-shadow: 0 0 10px rgba(0, 255, 204, 0.3), inset 0 0 10px rgba(0, 255, 204, 0.2) !important;
-        transition: all 0.4s ease-in-out !important;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3) !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
     
-    /* बटन पर माउस ले जाने पर (Hover Effect) खतरनाक चमक */
+    /* बटन पर माउस ले जाने पर स्मूथ ग्लो इफेक्ट */
     div.stButton > button:hover {
-        background: #00ffcc !important;
-        color: #000000 !important; /* टेक्स्ट ब्लैक हो जाएगा */
-        box-shadow: 0 0 20px #00ffcc, 0 0 40px #00ffcc !important;
-        transform: translateY(-3px);
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5) !important;
+        background: linear-gradient(135deg, #60a5fa 0%, #4f46e5 100%) !important;
     }
     
-    /* 5. डेटा टेबल और कार्ड्स को ग्लास जैसा चमकता हुआ बनाना (Cyber Cards) */
+    /* 5. कार्ड्स और इनपुट बॉक्स को 'कांच' (Glassmorphism) जैसा लुक देना */
     div[data-testid="metric-container"], .element-container, div[data-baseweb="input"] {
-        background-color: rgba(10, 10, 20, 0.75) !important;
-        border: 1px solid #ff007f !important;
-        border-radius: 4px !important;
-        box-shadow: 0 0 15px rgba(255, 0, 127, 0.15) !important;
+        background: rgba(255, 255, 255, 0.03) !important;
+        backdrop-filter: blur(12px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-radius: 16px !important; /* प्रीमियम कट्स */
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
+        padding: 20px !important;
         transition: all 0.3s ease;
     }
     
+    /* कार्ड्स पर माउस ले जाने पर चमकना */
     div[data-testid="metric-container"]:hover {
-        border: 1px solid #00ffcc !important;
-        box-shadow: 0 0 20px rgba(0, 255, 204, 0.3) !important;
+        background: rgba(255, 255, 255, 0.06) !important;
+        border: 1px solid rgba(56, 189, 248, 0.3) !important;
     }
     
-    /* 6. सिलेक्टर्स और इनपुट टेक्स्ट का रंग बदलना */
-    input, select, textarea {
-        color: #00ffcc !important;
-    }
+    /* 6. टेक्स्ट और स्लाइडर्स की स्टाइलिंग */
     label p {
-        color: #ff007f !important; /* इनपुट लेबल्स को पिंक करना */
-        font-weight: bold;
+        color: #94a3b8 !important;
+        font-weight: 500 !important;
+        font-size: 15px !important;
+    }
+    input, select {
+        color: #ffffff !important;
     }
     </style>
     """, unsafe_allow_html=True)
