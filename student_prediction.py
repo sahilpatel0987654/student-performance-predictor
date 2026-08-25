@@ -1,11 +1,37 @@
+import subprocess
+import sys
+
+# ऑटो-इंस्टॉलेशन कोड: यह कोड वेबसाइट पर बिना किसी एरर के लाइब्रेरीज़ खुद इंस्टॉल कर देगा
+def install(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+try:
+    import pandas as pd
+except ImportError:
+    install('pandas')
+    import pandas as pd
+
+try:
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+except ImportError:
+    install('matplotlib')
+    install('seaborn')
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+
+try:
+    from sklearn.model_selection import train_test_split
+    from sklearn.ensemble import RandomForestClassifier
+    from sklearn.metrics import accuracy_score
+except ImportError:
+    install('scikit-learn')
+    from sklearn.model_selection import train_test_split
+    from sklearn.ensemble import RandomForestClassifier
+    from sklearn.metrics import accuracy_score
+
 import streamlit as st
-import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score
 
 # --- पेज का टाइटल और लेआउट सेट करना ---
 st.set_page_config(page_title="Student Performance Predictor", layout="wide")
@@ -13,7 +39,7 @@ st.set_page_config(page_title="Student Performance Predictor", layout="wide")
 st.title("🎓 Intelligent Student Performance Prediction & Academic Risk Analysis")
 st.write("This web application uses **Machine Learning (Random Forest)** to predict student performance and analyze academic risk early.")
 
-# --- बैकएंड: डेटासेट तैयार करना और मॉडल ट्रेन करना ---
+# --- बैकएंड: डेटासेट तैयार करना और MODEL ट्रेन करना ---
 @st.cache_data
 def load_and_train():
     np.random.seed(42)
@@ -68,11 +94,9 @@ tab1, tab2 = st.tabs(["🖥️ Project Dashboard & Visuals", "🔮 Live Risk Pre
 with tab1:
     st.header("📊 Student Dataset & Data Analytics")
     
-    # 1. डेटासेट दिखाना
     st.subheader("📋 Sample Student Dataset (First 10 Rows)")
     st.dataframe(df.head(10), use_container_width=True)
     
-    # 2. ग्राफ्स दिखाना (दो कॉलम्स में साइड-बाय-साइड)
     st.subheader("📈 Graphical Analytics")
     col1, col2 = st.columns(2)
     
@@ -98,7 +122,6 @@ with tab2:
     st.header("🔮 Test Academic Risk for a New Student")
     st.write("Enter the student's metrics below to check if they are at academic risk:")
     
-    # इनपुट फॉर्म बनाना
     with st.form("prediction_form"):
         col_in1, col_in2 = st.columns(2)
         with col_in1:
@@ -110,14 +133,13 @@ with tab2:
             
         submit_btn = st.form_submit_button("Predict Academic Risk")
         
-    # प्रेडिक्शन का रिजल्ट दिखाना
     if submit_btn:
         new_data = pd.DataFrame([[input_attendance, input_study, input_prev, input_assign]], 
                                 columns=['Attendance', 'Study_Hours', 'Previous_Score', 'Assignment_Score'])
         prediction = model.predict(new_data)
         
         st.subheader("📢 Prediction Result:")
-        if prediction[0] == 1:
+        if prediction == 1:
             st.error("⚠️ **HIGH ACADEMIC RISK!** This student needs immediate mentorship and extra support.")
         else:
             st.success("✅ **SAFE / NO RISK.** The student is performing well academically.")
