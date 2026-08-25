@@ -1,37 +1,11 @@
-import subprocess
-import sys
-
-# ऑटो-इंस्टॉलेशन कोड: यह कोड वेबसाइट पर बिना किसी एरर के लाइब्रेरीज़ खुद इंस्टॉल कर देगा
-def install(package):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-
-try:
-    import pandas as pd
-except ImportError:
-    install('pandas')
-    import pandas as pd
-
-try:
-    import matplotlib.pyplot as plt
-    import seaborn as sns
-except ImportError:
-    install('matplotlib')
-    install('seaborn')
-    import matplotlib.pyplot as plt
-    import seaborn as sns
-
-try:
-    from sklearn.model_selection import train_test_split
-    from sklearn.ensemble import RandomForestClassifier
-    from sklearn.metrics import accuracy_score
-except ImportError:
-    install('scikit-learn')
-    from sklearn.model_selection import train_test_split
-    from sklearn.ensemble import RandomForestClassifier
-    from sklearn.metrics import accuracy_score
-
 import streamlit as st
+import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
 
 # --- पेज का टाइटल और लेआउट सेट करना ---
 st.set_page_config(page_title="Student Performance Predictor", layout="wide")
@@ -81,19 +55,12 @@ df, model, accuracy = load_and_train()
 # --- साइडबार में मॉडल की एक्युरेसी दिखाना ---
 st.sidebar.header("📊 Model Metrics")
 st.sidebar.success(f"Model Accuracy: {accuracy * 100:.2f}%")
-st.sidebar.markdown("""
-**Working Principle:**
-* **Algorithm:** Random Forest Classifier
-* **Dataset Size:** 200 Students
-* **Risk Parameters:** Attendance < 75% OR Previous Score < 50
-""")
 
 # --- वेब पेज को दो हिस्सों (Tabs) में बांटना ---
 tab1, tab2 = st.tabs(["🖥️ Project Dashboard & Visuals", "🔮 Live Risk Predictor Form"])
 
 with tab1:
     st.header("📊 Student Dataset & Data Analytics")
-    
     st.subheader("📋 Sample Student Dataset (First 10 Rows)")
     st.dataframe(df.head(10), use_container_width=True)
     
@@ -104,24 +71,16 @@ with tab1:
         st.write("**Student Distribution Chart**")
         fig1, ax1 = plt.subplots(figsize=(5, 3.5))
         sns.countplot(x='Academic_Risk', data=df, palette='Set2', ax=ax1)
-        ax1.set_title('Safe (0) vs Academic Risk (1)')
-        ax1.set_xlabel('Risk Status')
-        ax1.set_ylabel('Count')
         st.pyplot(fig1)
         
     with col2:
         st.write("**Attendance vs Previous Score Scatter Plot**")
         fig2, ax2 = plt.subplots(figsize=(6, 3.5))
         sns.scatterplot(x='Attendance', y='Previous_Score', hue='Academic_Risk', data=df, palette='coolwarm', ax=ax2)
-        ax2.axvline(x=75, color='red', linestyle='--', alpha=0.6, label='75% Attendance')
-        ax2.axhline(y=50, color='blue', linestyle='--', alpha=0.6, label='50 Passing Marks')
-        ax2.legend(fontsize='small')
         st.pyplot(fig2)
 
 with tab2:
     st.header("🔮 Test Academic Risk for a New Student")
-    st.write("Enter the student's metrics below to check if they are at academic risk:")
-    
     with st.form("prediction_form"):
         col_in1, col_in2 = st.columns(2)
         with col_in1:
@@ -140,6 +99,6 @@ with tab2:
         
         st.subheader("📢 Prediction Result:")
         if prediction == 1:
-            st.error("⚠️ **HIGH ACADEMIC RISK!** This student needs immediate mentorship and extra support.")
+            st.error("⚠️ **HIGH ACADEMIC RISK!** This student needs immediate mentorship.")
         else:
-            st.success("✅ **SAFE / NO RISK.** The student is performing well academically.")
+            st.success("✅ **SAFE / NO RISK.** The student is performing well.")
