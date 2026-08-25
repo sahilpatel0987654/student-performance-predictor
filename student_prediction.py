@@ -1,3 +1,20 @@
+import subprocess
+import sys
+
+# ऑटो-इंस्टॉलेशन कोड: यह कोड वेबसाइट पर बिना किसी एरर के लाइब्रेरीज़ खुद इंस्टॉल कर देगा
+def install(package):
+    try:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+    except Exception:
+        pass
+
+# ज़रूरी लाइब्रेरीज़ को ज़बरदस्ती लोड करना
+for lib in ['pandas', 'numpy', 'matplotlib', 'seaborn', 'scikit-learn']:
+    try:
+        __import__(lib)
+    except ImportError:
+        install(lib)
+
 import streamlit as st
 import pandas as pd
 import numpy as np
